@@ -18,30 +18,92 @@ Building a "vibe-coded" agentic SOC service layer on top of Wazuh is **highly fe
 
 | Project | Stars | What It Does | Tech Stack | License |
 |---------|-------|-------------|------------|---------|
+| [**Agentic SOC Platform**](https://github.com/FunnyWolf/agentic-soc-platform) | 587 | Highest-starred agentic SOC. AI Agent templates (LangGraph, Dify) with local LLM support. Redis Streams alert queuing, built-in SIRP on Nocoly. Natively supports Splunk/ELK, integrable with Wazuh via webhook. | Python, Redis, LangGraph, Dify | MIT |
 | [**Wazuh-MCP-Server** (GenSecAI)](https://github.com/gensecaihq/Wazuh-MCP-Server) | 133 | 48 specialized MCP tools for querying Wazuh via natural language — alerts, agents, vulnerabilities, compliance, active response. Production-ready with OAuth 2.0, circuit breakers, rate limiting, Prometheus metrics. | Python 3.13+, FastAPI, Docker | MIT |
-| [**SocTalk**](https://github.com/gbrigandi/soctalk) | 25 | Full agentic SOC: autonomous triage → investigation → escalation → response. Supervisor + worker architecture across Wazuh, Cortex, MISP, TheHive. Dual-LLM (fast router + reasoning engine). | Python, LangGraph, FastAPI, SvelteKit, PostgreSQL | MIT |
-| [**AI_SOC**](https://github.com/zhadyz/AI_SOC) | 62 | Research-grade AI-augmented SOC. ML-based intrusion detection (99.28% accuracy), alert triage service, RAG-based threat intelligence. 15-min Docker deployment. | Python 3.10+, scikit-learn, XGBoost, Wazuh, Docker, Grafana | Apache 2.0 |
+| [**mcp-server-wazuh** (Rust)](https://github.com/gbrigandi/mcp-server-wazuh) | 181 | High-performance Rust MCP server bridging Wazuh to Claude Desktop and MCP clients. Alert triage, vulnerability assessment, compliance monitoring (PCI-DSS, HIPAA), forensic capabilities. | Rust (rmcp v0.10+) | — |
+| [**SOCFortress CoPilot**](https://github.com/socfortress/CoPilot) | ~391 | Single-pane-of-glass management for Wazuh, Velociraptor, Graylog. AI Chat Agent for natural language queries across all data sources. Production-mature with regular releases. | Python (FastAPI), Vue.js, Docker, PostgreSQL | AGPL-3.0 |
+| [**SocTalk**](https://github.com/gbrigandi/soctalk) | 25 | Full agentic SOC: autonomous triage → investigation → escalation → response. Supervisor + worker architecture across Wazuh, Cortex, MISP, TheHive. Dual-LLM (fast router + reasoning engine). Includes MITRE ATT&CK attack simulator for testing. | Python, LangGraph, FastAPI, SvelteKit, PostgreSQL | MIT |
+| [**AI_SOC**](https://github.com/zhadyz/AI_SOC) | 62 | Research-grade AI-augmented SOC. ML-based intrusion detection (99.28% accuracy), alert triage service, RAG-based threat intelligence. 15-min Docker deployment. Academic foundation from CSU San Bernardino. | Python 3.10+, scikit-learn, XGBoost, Wazuh, ChromaDB, Docker, Grafana | Apache 2.0 |
+| [**Wazuh-Openclaw-Autopilot**](https://github.com/gensecaihq/Wazuh-Openclaw-Autopilot) | 20 | Autonomous SOC layer using OpenClaw agents with MCP. 7 specialized agents with sequential pipeline. Multi-LLM support (Claude, GPT-4o, Groq, Mistral, Grok, Gemini, Ollama). **Can run fully air-gapped with local models.** | Python, OpenClaw, MCP, Prometheus, Slack | MIT |
 
-### Tier 2: SOAR Automation Labs
+### Tier 2: SOAR & Automation Platforms
+
+| Project | Stars | What It Does |
+|---------|-------|-------------|
+| [**Tracecat**](https://github.com/TracecatHQ/tracecat) | ~3,500 | AI-native open-source SOAR. Click-and-drag workflow builder, agents with MCP server support, Temporal for durable execution, 100+ integrations. The open-source Tines/Splunk SOAR alternative. |
+| [**Shuffle SOAR**](https://github.com/Shuffle/Shuffle) | ~2,200 | Primary open-source SOAR with official Wazuh partnership (Sept 2025). 11,000+ endpoints across 200+ app integrations. Native Wazuh integration since v4.4. |
+| [**SOC-Automation-Lab**](https://github.com/uruc/SOC-Automation-Lab) | — | Wazuh + Shuffle SOAR + TheHive. Complete automated workflow: alert → enrichment (VirusTotal) → case creation → analyst notification → response. |
+| [**SOAR-Flow**](https://github.com/malwarekid/SOAR-Flow) | — | Shuffle + Wazuh + TheHive with VirusTotal/AbuseIPDB enrichment and Discord notifications. |
+
+### Tier 3: Lighter-Weight LLM Integrations
 
 | Project | What It Does |
 |---------|-------------|
-| [**SOC-Automation-Lab**](https://github.com/uruc/SOC-Automation-Lab) | Wazuh + Shuffle SOAR + TheHive. Complete automated workflow: alert → enrichment (VirusTotal) → case creation → analyst notification → response. |
-| [**SOAR-Flow**](https://github.com/malwarekid/SOAR-Flow) | Shuffle + Wazuh + TheHive with VirusTotal/AbuseIPDB enrichment and Discord notifications. |
 | [**Wazuh-Artificial-Intelligence**](https://github.com/marcus-ar/Wazuh-Artificial-Intelligence) | Claude Haiku integration directly into Wazuh Dashboard (tested on Wazuh 4.9.1). |
+| [**Wazuh-Ollama-SOC-Integration**](https://github.com/eddiepeter75/Wazuh-Ollama-SOC-Integration) | Flask API bridging Wazuh Active Response to local Ollama (Llama 3). On-prem AI summaries and impact assessments. |
+| [**n8n-wazuh-ai**](https://github.com/pawelsameryt/n8n-wazuh-ai) | n8n workflow automating Wazuh alert analysis using Claude 3.5 Sonnet via OpenRouter. Groups alerts, identifies false positives, generates HTML email reports. |
+| [**Wazuh-ChatGPT**](https://github.com/AnonymousWP/Wazuh-ChatGPT-integration) | Python script calling ChatGPT API on Wazuh rule triggers for alert enrichment. |
 
-### Tier 3: Official Wazuh Direction
+### Tier 4: Official Wazuh Direction
 
 Wazuh is officially investing in agentic AI (blog post from January 2026). Their demonstrated use cases include:
 - AI agents that generate decoders, deploy them, test via logtest, and self-correct errors
 - Agents interacting through Wazuh's REST API with proper permissions
 - "Coordination, not autonomy" — human-in-the-loop by design
 
-**Source:** [A Sneak Peak at Agentic AI in Wazuh](https://wazuh.com/blog/a-sneak-peak-at-agentic-ai-in-wazuh/)
+**Sources:**
+- [A Sneak Peak at Agentic AI in Wazuh (Jan 2026)](https://wazuh.com/blog/a-sneak-peak-at-agentic-ai-in-wazuh/)
+- [Claude Haiku in the Wazuh Dashboard](https://wazuh.com/blog/leveraging-claude-haiku-in-the-wazuh-dashboard-for-llm-powered-insights/)
+- [Wazuh PoC: Leveraging LLMs for Alert Enrichment](https://documentation.wazuh.com/current/proof-of-concept-guide/leveraging-llms-for-alert-enrichment.html)
+- [Wazuh + Shuffle Partnership (Sept 2025)](https://wazuh.com/blog/wazuh-and-shuffle-announce-technology-partnership-to-deliver-integrated-security-automation/)
 
 ---
 
-## 2. Recommended Architecture
+## 2. Wazuh API & Integration Points (How Agents Connect)
+
+The Wazuh platform exposes two APIs that make agentic automation possible:
+
+### Wazuh Server API (REST, port 55000)
+
+| Endpoint | Use for Agentic SOC |
+|----------|---------------------|
+| `/agents` | Enumerate endpoints, manage fleet, restart/remove agents |
+| `/rules` & `/decoders` | Programmatically adjust detection logic |
+| `/logtest` | Validate rule changes before deployment |
+| `/event` | Inject synthetic or correlated events (rate-limited: 30 req/min) |
+| `/sca` | Security Configuration Assessment — posture data |
+| `/syscheck` | File Integrity Monitoring results |
+| `/syscollector` | System inventory (packages, ports, processes) |
+| `/active-response` | Trigger containment actions on endpoints |
+
+### Wazuh Indexer API (OpenSearch-compatible, port 9200)
+
+Full query DSL access to all indexed security data:
+- `wazuh-alerts-*` — triggered alerts (primary data source for triage agents)
+- `wazuh-archives-*` — all raw events (when archiving is enabled)
+- `wazuh-states-vulnerabilities-*` — detected vulnerabilities
+
+### Alert Consumption Methods (for Real-Time Ingestion)
+
+| Method | Latency | Best For |
+|--------|---------|---------|
+| Custom integration webhook | Real-time | Push alerts to your service endpoint |
+| Filebeat → Kafka/Redis | Near real-time | High-volume, reliable queueing |
+| Indexer API polling | Seconds | Historical analysis, correlation |
+| `alerts.json` file tail | Real-time | Simple single-server setups |
+| Syslog forwarding | Real-time | Integration with external SIEMs |
+
+### Active Response (Automated Containment)
+
+Wazuh agents can execute containment scripts on endpoints triggered by alert rules:
+- IP blocking (iptables, Windows Firewall, pf)
+- Host isolation, process termination, file quarantine
+- **Custom scripts in any language** — Python most common
+- Supports auto-revert after timeout and repeated-offender escalation
+
+---
+
+## 3. Recommended Architecture
 
 ### Design Philosophy: "Vibe-Coded" = Low-Config, High-Autonomy, Human-in-the-Loop
 
@@ -250,7 +312,42 @@ I (Claude) can help you build this step by step:
 
 ---
 
-## 7. Competitive Advantages of This Approach
+## 7. Industry Validation & Market Context
+
+### The Agentic SOC Market Is Real (2026 Data)
+
+- **Gartner** added "AI SOC Agents" to its 2025 Hype Cycle for Security Operations
+- **Omdia** is tracking **50+ agentic SOC startups**; 39% of early adopters deploy for cost reduction
+- **Elastic** calls 2026 "the year to upgrade to an agentic AI SOC"
+- Market penetration is still **1–5%** — massive first-mover opportunity
+- Nearly two-thirds of organizations are experimenting, but fewer than 1 in 4 have deployed to production
+
+### Proven Results from Early Adopters
+
+| Platform | Metric | Result |
+|----------|--------|--------|
+| Torq HyperSOC | MTTR | Hours → **<2 minutes** |
+| Palo Alto XSIAM (Forrester) | ROI | **257% ROI**, sub-6-month payback |
+| IBM ATOM | L1 Automation | **85% of L1 SOC activity automated** |
+| Conifers.ai | Investigation Time | **87% faster**, ~2.5 min average |
+| Intezer | Alert Coverage | **100% of alerts investigated in <2 min** |
+| General AI SOC | Triage Workload | **50–70% reduction** in manual work |
+
+### Commercial Competitors (What You're Disrupting)
+
+| Vendor | Product | Pricing Model |
+|--------|---------|--------------|
+| Palo Alto | Cortex XSIAM / AgentiX | Enterprise (custom) — $100K+/yr |
+| CrowdStrike | Charlotte AI on Falcon | Per-endpoint enterprise |
+| IBM | ATOM + MDR | Custom enterprise |
+| Stellar Cyber | Open XDR | Custom (mid-market focus) |
+| Torq | HyperSOC | Custom enterprise |
+
+**Your advantage:** You offer the same AI-powered triage at a fraction of the cost using open-source Wazuh + open-source agents + Claude API — without the enterprise vendor lock-in.
+
+---
+
+## 8. Competitive Advantages of This Approach
 
 1. **Open-source foundation** — No vendor lock-in. Wazuh, TheHive, MISP are all open-source.
 2. **AI-native from day one** — Not bolting AI onto a legacy SIEM. Designed for autonomous operation.
@@ -261,7 +358,7 @@ I (Claude) can help you build this step by step:
 
 ---
 
-## 8. Can We Build This Together?
+## 9. Can We Build This Together?
 
 **Yes, absolutely.** Here's what the collaboration looks like:
 
@@ -288,24 +385,47 @@ Just say the word on which phase to start with.
 
 ## Sources & References
 
-### GitHub Projects
-- [Wazuh-MCP-Server (GenSecAI)](https://github.com/gensecaihq/Wazuh-MCP-Server) — 133 stars, production-ready MCP server
-- [SocTalk](https://github.com/gbrigandi/soctalk) — AI-powered SOC automation with LangGraph
-- [AI_SOC](https://github.com/zhadyz/AI_SOC) — Research-grade AI-augmented SOC
+### GitHub Projects (Agentic SOC & AI)
+- [Agentic SOC Platform (FunnyWolf)](https://github.com/FunnyWolf/agentic-soc-platform) — 587 stars, highest-starred agentic SOC
+- [SOCFortress CoPilot](https://github.com/socfortress/CoPilot) — ~391 stars, production SOC management
+- [mcp-server-wazuh (Rust)](https://github.com/gbrigandi/mcp-server-wazuh) — 181 stars, high-perf MCP bridge
+- [Wazuh-MCP-Server (GenSecAI)](https://github.com/gensecaihq/Wazuh-MCP-Server) — 133 stars, 48 MCP tools
+- [AI_SOC](https://github.com/zhadyz/AI_SOC) — 62 stars, research-grade AI SOC
+- [SocTalk](https://github.com/gbrigandi/soctalk) — 25 stars, full agentic pipeline with LangGraph
+- [Wazuh-Openclaw-Autopilot](https://github.com/gensecaihq/Wazuh-Openclaw-Autopilot) — 20 stars, air-gapped capable
+- [Tracecat](https://github.com/TracecatHQ/tracecat) — ~3,500 stars, AI-native open-source SOAR
+- [Shuffle SOAR](https://github.com/Shuffle/Shuffle) — ~2,200 stars, official Wazuh partner
 - [SOC-Automation-Lab](https://github.com/uruc/SOC-Automation-Lab) — Wazuh + Shuffle + TheHive lab
 - [SOAR-Flow](https://github.com/malwarekid/SOAR-Flow) — Shuffle SOAR + Wazuh automation
+- [Wazuh-Ollama-SOC-Integration](https://github.com/eddiepeter75/Wazuh-Ollama-SOC-Integration) — On-prem AI with Ollama
+- [n8n-wazuh-ai](https://github.com/pawelsameryt/n8n-wazuh-ai) — n8n + Claude alert analysis
 - [Wazuh-Artificial-Intelligence](https://github.com/marcus-ar/Wazuh-Artificial-Intelligence) — Claude on Wazuh Dashboard
-- [SOCFortress Wazuh MCP Server](https://socfortress.medium.com/introducing-wazuh-mcp-server-bridging-siem-and-ai-for-smarter-security-operations-ea9b5441dbba)
+- [Agentic-SOC-Simulation](https://github.com/SafelineMan/Agentic-SOC-Simulation) — 7-agent SOC simulation with DeepSeek
+
+### Wazuh Official
+- [Wazuh Blog: Agentic AI in Wazuh (Jan 2026)](https://wazuh.com/blog/a-sneak-peak-at-agentic-ai-in-wazuh/)
+- [Claude Haiku in the Wazuh Dashboard](https://wazuh.com/blog/leveraging-claude-haiku-in-the-wazuh-dashboard-for-llm-powered-insights/)
+- [PoC: Leveraging LLMs for Alert Enrichment](https://documentation.wazuh.com/current/proof-of-concept-guide/leveraging-llms-for-alert-enrichment.html)
+- [Wazuh + Shuffle Partnership](https://wazuh.com/blog/wazuh-and-shuffle-announce-technology-partnership-to-deliver-integrated-security-automation/)
+- [Wazuh Server API Reference](https://documentation.wazuh.com/current/user-manual/api/reference.html)
+- [Wazuh Indexer API](https://documentation.wazuh.com/current/user-manual/indexer-api/getting-started.html)
+- [Wazuh Active Response](https://documentation.wazuh.com/current/user-manual/capabilities/active-response/index.html)
+- [Wazuh Cloud Pricing](https://wazuh.com/cloud/)
 
 ### Market & Industry
-- [Wazuh Blog: Agentic AI in Wazuh (Jan 2026)](https://wazuh.com/blog/a-sneak-peak-at-agentic-ai-in-wazuh/)
-- [Wazuh Cloud Pricing](https://wazuh.com/cloud/)
 - [Top 10 Agentic SOC Platforms 2025 — Stellar Cyber](https://stellarcyber.ai/learn/top-10-agentic-soc-platforms/)
 - [Omdia: Agentic SOC Market Landscape 2025](https://omdia.tech.informa.com/om139309/market-landscape-agentic-security-operations-center-soc--2025)
 - [Elastic: Why 2026 is the Year for Agentic AI SOC](https://www.elastic.co/security-labs/why-2026-is-the-year-to-upgrade-to-an-agentic-ai-soc)
 - [Gartner Hype Cycle: AI SOC Agents](https://www.prophetsecurity.ai/blog/ai-soc-agents-in-gartner-hype-cycle-for-security-operations)
 - [AI Agent Development Cost Guide 2026](https://www.cleveroad.com/blog/ai-agent-development-cost/)
 - [Wazuh Cost Analysis — Sirius Open Source](https://www.siriusopensource.com/en-us/blog/how-much-does-wazuh-cost)
+- [IBM Delivers Autonomous Security Operations](https://newsroom.ibm.com/2025-04-28-ibm-delivers-autonomous-security-operations-with-cutting-edge-agentic-ai)
+- [Palo Alto Cortex AgentiX](https://www.paloaltonetworks.com/company/press/2025/palo-alto-networks-unveils-cortex-agentix-to-build--deploy-and-govern-the-agentic-workforce-of-the-future)
+- [SOCFortress MCP Server Introduction](https://socfortress.medium.com/introducing-wazuh-mcp-server-bridging-siem-and-ai-for-smarter-security-operations-ea9b5441dbba)
+
+### Academic
+- [SERC: Security Event Response Copilot (MDPI Sensors 2025)](https://www.mdpi.com/1424-8220/25/3/870)
+- [AI-Augmented SOC Survey (CSU San Bernardino 2025)](https://github.com/zhadyz/AI_SOC)
 
 ---
 
