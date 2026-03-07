@@ -19,7 +19,7 @@ import time
 
 from .agents import run_pipeline
 from .alerts import SCENARIOS, generate_all_scenarios, generate_scenario
-from .display import print_banner, print_result, print_summary
+from .display import make_step_callback, print_banner, print_result, print_summary
 
 
 def main():
@@ -51,7 +51,12 @@ def main():
     start_time = time.time()
 
     for i, alert in enumerate(alerts, 1):
-        result = run_pipeline(alert)
+        from .display import print_alert
+        print_alert(alert, i, total)
+
+        # Run pipeline with live step rendering
+        step_callback = make_step_callback()
+        result = run_pipeline(alert, on_step=step_callback)
         results.append(result)
         print_result(result, i, total)
 
